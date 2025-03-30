@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-// import 'package:login_signup/screens/signin_screen.dart';
-// import 'package:login_signup/theme/theme.dart';
-// import 'package:login_signup/widgets/custom_scaffold.dart';
 import './signin_screen.dart';
-// import 'signup_screen.dart';
 import '../widgets/custom_scaffold.dart';
-// import '../widgets/welcome_button.dart';
 import '../theme/theme.dart';
 
 class SignUpScreen extends StatefulWidget {

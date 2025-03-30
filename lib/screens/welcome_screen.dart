@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:login_signup/screens/signin_screen.dart';
-// import 'package:login_signup/screens/signup_screen.dart';
-// import 'package:login_signup/theme/theme.dart';
-// import 'package:login_signup/widgets/custom_scaffold.dart';
-// import 'package:login_signup/widgets/welcome_button.dart';
 import './signin_screen.dart';
 import 'signup_screen.dart';
 import '../widgets/custom_scaffold.dart';
@@ -39,7 +34,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       TextSpan(
                         text:
-                            '\nEnter personal details to your employee account',
+                            '\nEnter personal details to find your best hotel.',
                         style: TextStyle(
                           fontSize: 20,
                           // height: 0,
