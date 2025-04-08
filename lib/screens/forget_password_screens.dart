@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/theme/theme.dart';
+import 'package:flutter_app/widgets/Custom_input.dart';
 import 'package:flutter_app/widgets/custom_scaffold.dart';
-import 'package:icons_plus/icons_plus.dart';
+// import 'package:icons_plus/icons_plus.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -14,6 +15,23 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _formSignupKey = GlobalKey<FormState>();
   bool agreePersonalData = true;
+  final TextEditingController _emailController = TextEditingController();
+
+  void _findAccoutn() {
+    String email = _emailController.text.trim();
+    if (email.isEmpty) {
+      print("Email field is empty");
+    } else {
+      print("Entered email : $email");
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
@@ -24,7 +42,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             flex: 7,
             child: Container(
               padding: const EdgeInsets.fromLTRB(25.0, 50.0, 25.0, 20.0),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
@@ -49,33 +67,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                       const SizedBox(height: 40.0),
 
-
                       // email
-                      TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter Email';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          label: const Text('Email'),
-                          hintText: 'Enter Email',
-                          hintStyle: const TextStyle(color: Colors.black26),
-                          border: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Colors.black12, // Default border color
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
+                      CustomEmailInput(controller: _emailController),
                       const SizedBox(height: 25.0),
 
                       const SizedBox(height: 25.0),
@@ -110,6 +103,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
+                            _findAccoutn();
                             if (_formSignupKey.currentState!.validate() &&
                                 agreePersonalData) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -147,7 +141,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               horizontal: 10,
                             ),
                             child: Text(
-                              'Sign up with',
+                              'Try in another way',
                               style: TextStyle(color: Colors.black45),
                             ),
                           ),
@@ -160,8 +154,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ],
                       ),
                       const SizedBox(height: 30.0),
-                      // sign up social media logo
 
+                      // sign up social media logo
                       const SizedBox(height: 25.0),
                       // already have an account
                       Row(
