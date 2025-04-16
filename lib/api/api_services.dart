@@ -7,7 +7,7 @@ class ApiService {
   ApiService()
     : _dio = Dio(
         BaseOptions(
-          baseUrl: 'https://staymate-ten.vercel.app',
+          baseUrl: "https://staymate-eight.vercel.app",
           connectTimeout: const Duration(seconds: 120),
           receiveTimeout: const Duration(seconds: 120),
           headers: {'Content-Type': 'application/json'},

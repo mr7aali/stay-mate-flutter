@@ -30,7 +30,6 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<void> _handleSignIn() async {
-    print("HI THERE");
     if (_formSignInKey.currentState!.validate()) {
       setState(() => isLoading = true);
       try {
