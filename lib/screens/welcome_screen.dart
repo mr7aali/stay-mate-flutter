@@ -13,11 +13,6 @@ class WelcomeScreen extends StatelessWidget {
     return CustomScaffold(
       child: Column(
         children: [
-          Image.asset(
-            'assets/logo/logo.png', // <-- your image path
-            width: 100, // you can adjust width/height
-            height: 100,
-          ),
           Flexible(
             flex: 8,
             child: Container(
@@ -25,57 +20,106 @@ class WelcomeScreen extends StatelessWidget {
                 vertical: 0,
                 horizontal: 40.0,
               ),
-              child: Center(
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Welcome Back!\n',
-                        style: TextStyle(
-                          fontSize: 45.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      TextSpan(
-                        text:
-                            '\nEnter personal details to find your best hotel.',
-                        style: TextStyle(
-                          fontSize: 20,
-                          // height: 0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
-                  const Expanded(
-                    child: WelcomeButton(
-                      buttonText: 'Sign in',
-                      onTap: SignInScreen(),
-                      color: Colors.transparent,
-                      textColor: Colors.white,
+                  Container(
+                    width: 100,
+                    height: 80,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8), // rounded corners
+                    ),
+                    child: Image.asset(
+                      'assets/logo/logo.png',
+                      width: 100,
+                      height: 100,
                     ),
                   ),
-                  Expanded(
-                    child: WelcomeButton(
-                      buttonText: 'Sign up',
-                      onTap: const SignUpScreen(),
-                      color: Colors.white,
-                      textColor: lightColorScheme.primary,
+                  Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: 'Stay Mate\n',
+                            style: TextStyle(
+                              fontSize: 45.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const TextSpan(
+                            text:
+                                '\nJoin us to manage your stays effortlessly!',
+                            style: TextStyle(fontSize: 20, color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
+          ),
+
+          GridView.count(
+            crossAxisCount: 2,
+            shrinkWrap: true, // So GridView doesn't take all available space
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 3.5, // Adjusts the button height
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF6B81CC),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  "Register",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w900,
+                    fontFamily: "Archivo",
+                  ),
+                ),
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                  );
+                },
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Color(0xFF6B81CC), width: 2),
+                  foregroundColor: Color(0xFF6B81CC),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Archivo",
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF6B81CC),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

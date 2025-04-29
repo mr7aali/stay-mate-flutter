@@ -11,6 +11,7 @@ dependencies:
   icons_plus: ^4.0.0
   dio: ^5.8.0+1
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
@@ -20,6 +21,16 @@ flutter:
   assets:
     - assets/images/
     - assets/logo/
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/logo/logo.png"
+  web:
+    generate: true
+    image_path: "assets/logo/logo.png"
+    background_color: "#000000"
+    theme_color: "#000000"
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
