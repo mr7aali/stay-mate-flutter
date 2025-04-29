@@ -13,6 +13,11 @@ class WelcomeScreen extends StatelessWidget {
     return CustomScaffold(
       child: Column(
         children: [
+          Image.asset(
+            'assets/logo/logo.png', // <-- your image path
+            width: 100, // you can adjust width/height
+            height: 100,
+          ),
           Flexible(
             flex: 8,
             child: Container(
