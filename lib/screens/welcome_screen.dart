@@ -22,7 +22,6 @@ class WelcomeScreen extends StatelessWidget {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: [
                   Container(
                     width: 100,
@@ -59,67 +58,77 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
+                  GridView.count(
+                    crossAxisCount: 2,
+                    shrinkWrap:
+                        true, // So GridView doesn't take all available space
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 3, // Adjusts the button height
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                      horizontal: 4,
+                    ),
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignUpScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF6B81CC),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+
+                        child: Text(
+                          "Register",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "Archivo",
+                          ),
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignInScreen(),
+                            ),
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: Color(0xFF6B81CC), width: 2),
+                          foregroundColor: Color(0xFF6B81CC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Archivo",
+                            fontWeight: FontWeight.w900,
+                            color: Color(0xFF6B81CC),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
-          ),
-
-          GridView.count(
-            crossAxisCount: 2,
-            shrinkWrap: true, // So GridView doesn't take all available space
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 3.5, // Adjusts the button height
-            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF6B81CC),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Text(
-                  "Register",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
-                    fontFamily: "Archivo",
-                  ),
-                ),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignInScreen()),
-                  );
-                },
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Color(0xFF6B81CC), width: 2),
-                  foregroundColor: Color(0xFF6B81CC),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: "Archivo",
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF6B81CC),
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),
