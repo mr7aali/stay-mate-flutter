@@ -23,9 +23,11 @@ flutter:
     - assets/logo/
 
 flutter_launcher_icons:
-  android: "ic_launcher"
+  android: true
   ios: true
   image_path: "assets/logo/logo.png"
+  adaptive_icon_background: "#6B81CCFF" # Orange shade
+  adaptive_icon_foreground: "assets/logo/logo.png"
   web:
     generate: true
     image_path: "assets/logo/logo.png"

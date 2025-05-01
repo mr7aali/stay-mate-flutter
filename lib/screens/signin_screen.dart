@@ -4,8 +4,8 @@ import './signup_screen.dart';
 import '../theme/theme.dart';
 import '../widgets/custom_scaffold.dart';
 import 'forget_password_screens.dart';
-// import 'api_service.dart'; // Import the API service
 import 'package:flutter_app/api/api_services.dart';
+import 'package:flutter_app/screens/home_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -32,18 +32,21 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _handleSignIn() async {
     if (_formSignInKey.currentState!.validate()) {
       setState(() => isLoading = true);
+      showDialog(
+        context: context,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
       try {
         final response = await _apiService.login(
           email: emailController.text,
           password: passwordController.text,
         );
-        print(response);
+
         if (mounted) {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(const SnackBar(content: Text('Login successful!')));
           // TODO: Navigate to home screen or store JWT token
-          // Example: Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
         }
       } catch (e) {
         if (mounted) {
@@ -54,6 +57,7 @@ class _SignInScreenState extends State<SignInScreen> {
       } finally {
         if (mounted) {
           setState(() => isLoading = false);
+          Navigator.pop(context); // Close the loading dialog
         }
       }
     }
@@ -183,14 +187,15 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                       const SizedBox(height: 25.0),
+
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _handleSignIn,
                           child:
                               isLoading
-                                  ? const CircularProgressIndicator()
-                                  : const Text('Sign In'),
+                                  ? const Text('Loading...')
+                                  : const Text('Sign in'),
                         ),
                       ),
                       const SizedBox(height: 25.0),

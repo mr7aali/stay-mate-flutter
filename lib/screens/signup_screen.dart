@@ -33,6 +33,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<void> _handleSignUp() async {
     if (_formSignupKey.currentState!.validate() && agreePersonalData) {
       setState(() => isLoading = true);
+      showDialog(
+        context: context,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
       try {
         final response = await _apiService.register(
           username: fullNameController.text,
@@ -59,6 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } finally {
         if (mounted) {
           setState(() => isLoading = false);
+          Navigator.pop(context);
         }
       }
     } else if (!agreePersonalData) {
@@ -210,7 +215,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: isLoading ? null : _handleSignUp,
                           child:
                               isLoading
-                                  ? const CircularProgressIndicator()
+                                  ? const Text('Loading...')
                                   : const Text('Sign up'),
                         ),
                       ),

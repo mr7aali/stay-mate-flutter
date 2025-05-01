@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import './signin_screen.dart';
 import 'signup_screen.dart';
 import '../widgets/custom_scaffold.dart';
-import '../widgets/welcome_button.dart';
-import '../theme/theme.dart';
+// import '../widgets/welcome_button.dart';
+// import '../theme/theme.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -71,7 +71,7 @@ class WelcomeScreen extends StatelessWidget {
                       horizontal: 4,
                     ),
                     children: [
-                      ElevatedButton(
+                      OutlinedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -82,6 +82,7 @@ class WelcomeScreen extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF6B81CC),
+                          side: BorderSide(color: Color(0xFF6B81CC), width: 2),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
