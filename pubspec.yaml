@@ -10,6 +10,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   icons_plus: ^4.0.0
   dio: ^5.8.0+1
+  flutter_secure_storage: ^9.2.4
+  provider: ^6.1.2
+  jwt_decoder: ^2.0.1
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_test:

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:provider/provider.dart';
 import './signup_screen.dart';
 import '../theme/theme.dart';
 import '../widgets/custom_scaffold.dart';
-import 'forget_password_screens.dart';
-import 'package:flutter_app/api/api_services.dart';
-import 'package:flutter_app/screens/home_screen.dart';
+import './forget_password_screens.dart';
+import '../api/api_services.dart';
+import '../screens/home_screen.dart';
+// import 'pag';
+import 'package:flutter_app/auth/auth_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -42,22 +45,54 @@ class _SignInScreenState extends State<SignInScreen> {
           password: passwordController.text,
         );
 
-        if (mounted) {
-          ScaffoldMessenger.of(
+        final id = response['data']['_id'] as String?;
+        final email = response['data']['email'] as String?;
+        final role = response['data']['role'] as String?;
+        final accessToken = response['token']['access_token'] as String?;
+
+        if (id != null &&
+            email != null &&
+            role != null &&
+            accessToken != null) {
+          await Provider.of<AuthProvider>(
+            // ignore: use_build_context_synchronously
             context,
-          ).showSnackBar(const SnackBar(content: Text('Login successful!')));
-          // TODO: Navigate to home screen or store JWT token
+            listen: false,
+          ).login(id: id, email: email, role: role, accessToken: accessToken);
+          if (mounted) {
+            Navigator.pop(context); // Close loading dialog
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          }
+        } else {
+          if (mounted) {
+            Navigator.pop(context); // Close loading dialog
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Invalid response data from server'),
+              ),
+            );
+          }
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Login failed: $e')));
+          Navigator.pop(context); // Close loading dialog
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                e.toString().contains('401')
+                    ? 'Invalid email or password'
+                    : 'Login failed: $e',
+              ),
+            ),
+          );
         }
       } finally {
         if (mounted) {
           setState(() => isLoading = false);
-          Navigator.pop(context); // Close the loading dialog
         }
       }
     }
@@ -187,7 +222,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         ],
                       ),
                       const SizedBox(height: 25.0),
-
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
