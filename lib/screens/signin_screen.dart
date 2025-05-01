@@ -44,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
           email: emailController.text,
           password: passwordController.text,
         );
-
+        print(response);
         final id = response['data']['_id'] as String?;
         final email = response['data']['email'] as String?;
         final role = response['data']['role'] as String?;

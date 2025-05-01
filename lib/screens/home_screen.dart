@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/custom_card.dart';
+import 'package:flutter_app/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import '../auth/auth_provider.dart';
 import 'welcome_screen.dart';
@@ -39,38 +41,32 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.logout),
             onPressed: () async {
               await auth.logout();
-              // Navigator.of(context).pushAndRemoveUntil(
-              //   MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-              //   (route) => false,
-              // );
             },
           ),
         ],
       ),
-      body: Center(
+
+      drawer: CustomDrawer(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Welcome, ${auth.email ?? "User"}!'),
-            const SizedBox(height: 16),
-            Text('Role: ${auth.role ?? "N/A"}'),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () async {
-                // Authenticated API call placeholder
-              },
-              child: const Text('Make Authenticated Request'),
+            Text(
+              'Welcome, ${auth.email ?? "User"}!',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            // ElevatedButton(
-            //   onPressed: () async {
-            //     await auth.logout();
-            //     Navigator.of(context).pushAndRemoveUntil(
-            //       MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-            //       (route) => false,
-            //     );
-            //   },
-            //   child: const Text('Logout'),
-            // ),
+            Text(
+              'Role: ${auth.role ?? "N/A"}',
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 30,
+                itemBuilder: (context, index) => CustomCard(index: index),
+              ),
+            ),
           ],
         ),
       ),

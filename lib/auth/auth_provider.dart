@@ -8,11 +8,13 @@ class AuthProvider with ChangeNotifier {
   String? _token;
   String? _email;
   String? _role;
+  String? _id;
 
   bool get isAuthenticated => _token != null;
   String? get token => _token;
   String? get email => _email;
   String? get role => _role;
+  String? get id => _id;
 
   Future<void> login({
     required String id,
@@ -41,11 +43,12 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> checkAuthState() async {
-    final id = await _storage.read(key: 'user_id');
+    final id = await _storage.read(key: 'id');
     final email = await _storage.read(key: 'email');
     final role = await _storage.read(key: 'role');
     final token = await _storage.read(key: 'access_token');
 
+    //
     if (id != null &&
         email != null &&
         role != null &&
