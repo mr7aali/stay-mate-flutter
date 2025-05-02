@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/custom_card.dart';
+import 'package:flutter_app/screens/bookmark_screen.dart';
+import 'package:flutter_app/screens/profile_screen.dart';
+import 'package:flutter_app/screens/search_screen.dart';
 import 'package:flutter_app/widgets/custom_drawer.dart';
+import 'package:flutter_app/widgets/home_content_page.dart';
 import 'package:provider/provider.dart';
 import '../auth/auth_provider.dart';
 import 'welcome_screen.dart';
@@ -14,6 +17,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _screens = [
+    const HomeContentPage(),
+    const SearchScreen(),
+    const BookmarksScreen(),
+    const ProfileScreen(),
+  ];
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -62,43 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: CustomDrawer(),
-      body: Container(
-        // color: Colors.blueAccent,
-        color: Colors.white70,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+      body: _screens[_selectedIndex], // ← Switch between pages
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children: [
-              const SizedBox(height: 20),
-              Text(
-                'Accommodation Recommendations',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: ListView.builder(
-                    itemCount: 30,
-                    itemBuilder: (context, index) => CustomCard(index: index),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
       bottomNavigationBar: Container(
-        // evaluation: false,
         decoration: BoxDecoration(
-          // color: Colors.black,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
@@ -116,11 +94,15 @@ class _HomeScreenState extends State<HomeScreen> {
             Icon(Icons.bookmark_add_outlined),
             Icon(Icons.person_3),
           ],
-          index: 0,
+          index: _selectedIndex,
+
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
           onTap: (index) {
             // Handle navigation
+            setState(() {
+              _selectedIndex = index;
+            });
           },
         ),
       ),
