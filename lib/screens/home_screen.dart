@@ -1,4 +1,6 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_app/theme/theme.dart';
 import 'package:flutter_app/widgets/custom_card.dart';
 import 'package:flutter_app/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
@@ -34,41 +36,75 @@ class _HomeScreenState extends State<HomeScreen> {
     final auth = Provider.of<AuthProvider>(context);
 
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.black,
+        leading: Builder(
+          builder:
+              (context) => IconButton(
+                icon: const Icon(Icons.menu, color: Colors.white),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+              ),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.white),
+            tooltip: 'Logout',
             onPressed: () async {
               await auth.logout();
             },
           ),
         ],
       ),
-
       drawer: CustomDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome, ${auth.email ?? "User"}!',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Role: ${auth.role ?? "N/A"}',
-              style: const TextStyle(fontSize: 16, color: Colors.grey),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 30,
-                itemBuilder: (context, index) => CustomCard(index: index),
+      body: Container(
+        color: Colors.blueAccent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              const SizedBox(height: 20),
+              Text(
+                'Accommodation Recommendations',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 30,
+                  itemBuilder: (context, index) => CustomCard(index: index),
+                ),
+              ),
+            ],
+          ),
         ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        items: const [
+          Icon(Icons.home),
+          Icon(Icons.manage_search_rounded),
+          Icon(Icons.bookmark_add_outlined),
+          Icon(Icons.person_3),
+        ],
+        index: 0,
+        animationCurve: Curves.easeInOut,
+        animationDuration: const Duration(milliseconds: 300),
+        onTap: (index) {
+          // Handle navigation
+        },
       ),
     );
   }
