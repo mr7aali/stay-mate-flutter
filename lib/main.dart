@@ -1,31 +1,14 @@
-// import 'package:flutter/material.dart';
-// import '../theme/theme.dart';
-// import './screens/welcome_screen.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Flutter Demo',
-//       theme: lightMode,
-//       home: const WelcomeScreen(),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/change_password_screen.dart';
+import 'package:flutter_app/screens/edit_profile_screen.dart';
+import 'package:flutter_app/screens/notifications_screen.dart';
+import 'package:flutter_app/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
 import '../theme/theme.dart';
 import './screens/welcome_screen.dart';
-import './auth/auth_provider.dart';
 import './screens/home_screen.dart';
+import './auth/auth_provider.dart';
+import './providers/user_provider.dart'; // ✅ New import
 
 void main() {
   runApp(const MyApp());
@@ -33,10 +16,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AuthProvider()..checkAuthState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()..checkAuthState()),
+        ChangeNotifierProvider(create: (_) => UserProvider()), // ✅ Added
+      ],
       child: Consumer<AuthProvider>(
         builder:
             (ctx, auth, _) => MaterialApp(
@@ -47,6 +34,13 @@ class MyApp extends StatelessWidget {
                   auth.isAuthenticated
                       ? const HomeScreen()
                       : const WelcomeScreen(),
+              initialRoute: "/",
+              routes: {
+                '/edit-profile': (ctx) => const EditProfileScreen(),
+                '/change-password': (ctx) => const ChangePasswordScreen(),
+                '/notifications': (ctx) => const NotificationsScreen(),
+                '/settings': (ctx) => const SettingsScreen(),
+              },
             ),
       ),
     );
