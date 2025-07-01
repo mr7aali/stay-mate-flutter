@@ -1,6 +1,4 @@
-// Edit Profile Screen
 import 'package:flutter/material.dart';
-import 'package:flutter_app/widgets/custom_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 

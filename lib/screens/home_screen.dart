@@ -3,6 +3,7 @@ import 'package:flutter_app/screens/bookmark_screen.dart';
 import 'package:flutter_app/screens/change_password_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
 import 'package:flutter_app/screens/users_screen.dart';
+import 'package:flutter_app/providers/user_provider.dart';
 // import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/widgets/custom_navigation_bar.dart';
 import 'package:flutter_app/widgets/home_content_page.dart';
@@ -20,19 +21,21 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  final List<Widget> _screens = [
-    const HomeContentPage(),
-    // const ChangePasswordScreen(),
-    // const BookmarksScreen(),
-    const UsersScreen(),
-    const ProfileScreen(),
-  ];
   final List<String> _titles = [
     'Find Accommodation',
     // 'Search',
     'Bookmarks',
     'Profile',
   ];
+
+  List<Widget> get _screens {
+    final userRole = Provider.of<UserProvider>(context).user.role;
+    return [
+      const HomeContentPage(),
+      (userRole == 'user') ? const BookmarksScreen() : const UsersScreen(),
+      const ProfileScreen(),
+    ];
+  }
 
   // void _checkAuthAndRedirect() async {
   //   final auth = Provider.of<AuthProvider>(context, listen: false);
