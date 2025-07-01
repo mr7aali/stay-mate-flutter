@@ -121,9 +121,7 @@ class CustomCard extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const DetailScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => DetailScreen()),
                   );
                 },
                 style: OutlinedButton.styleFrom(
