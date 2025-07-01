@@ -117,7 +117,11 @@ class CustomCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: null,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Viewing Details')),
+                  );
+                },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.blue),
                   shape: RoundedRectangleBorder(
