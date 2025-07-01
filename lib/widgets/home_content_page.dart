@@ -185,12 +185,29 @@ class _HomeContentPageState extends State<HomeContentPage> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Filter Options',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          const Text(
+                            'Filter Options',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                filterLocation = '';
+                                priceRange = const RangeValues(0, 500);
+                                selectedAmenities.clear();
+                                selectedStars = null;
+                              });
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Reset Filters'),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       TextField(
