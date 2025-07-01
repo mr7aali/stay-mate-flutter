@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'detail_screen.dart';
 
 class CustomCard extends StatelessWidget {
   final int index;
@@ -118,8 +119,11 @@ class CustomCard extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Viewing Details')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailScreen(),
+                    ),
                   );
                 },
                 style: OutlinedButton.styleFrom(
