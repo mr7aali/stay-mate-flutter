@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/bookmark_screen.dart';
 import 'package:flutter_app/screens/change_password_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
+import 'package:flutter_app/screens/users_screen.dart';
 // import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/widgets/custom_navigation_bar.dart';
 import 'package:flutter_app/widgets/home_content_page.dart';
@@ -22,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeContentPage(),
     // const ChangePasswordScreen(),
-    const BookmarksScreen(),
+    // const BookmarksScreen(),
+    const UsersScreen(),
     const ProfileScreen(),
   ];
   final List<String> _titles = [
