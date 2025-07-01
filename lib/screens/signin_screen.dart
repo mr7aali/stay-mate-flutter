@@ -40,16 +40,23 @@ class _SignInScreenState extends State<SignInScreen> {
         builder: (context) => const Center(child: CircularProgressIndicator()),
       );
       try {
-        final response = await _apiService.login(
-          email: emailController.text,
-          password: passwordController.text,
-        );
-        print(response);
+        // final response = await _apiService.login(
+        //   email: emailController.text,
+        //   password: passwordController.text,
+        // );
+        final Map<String, dynamic> response = {
+          'data': {
+            '_id': '123abc',
+            'email': 'test@example.com',
+            'role': 'user',
+          },
+          'token': {'access_token': 'dummy_access_token_456'},
+        };
         final id = response['data']['_id'] as String?;
         final email = response['data']['email'] as String?;
         final role = response['data']['role'] as String?;
         final accessToken = response['token']['access_token'] as String?;
-
+        print(accessToken);
         if (id != null &&
             email != null &&
             role != null &&

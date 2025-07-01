@@ -57,8 +57,10 @@ class AuthProvider with ChangeNotifier {
       _email = email;
       _role = role;
       _token = token;
+      print("stay login");
       notifyListeners();
     } else if (token != null && JwtDecoder.isExpired(token)) {
+      print("Test logout");
       await logout(); // Clear expired token
     }
   }
