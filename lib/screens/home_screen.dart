@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeContentPage(),
     const ChangePasswordScreen(),
     const BookmarksScreen(),
-    // const ProfileScreen(),
+    const ProfileScreen(),
   ];
   final List<String> _titles = [
     'Find Accommodation',
