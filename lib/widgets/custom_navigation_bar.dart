@@ -28,7 +28,7 @@ class CustomBottomNav_Bar extends StatelessWidget {
         backgroundColor: Colors.transparent,
         items: const [
           Icon(Icons.home),
-          Icon(Icons.manage_search_rounded),
+          // Icon(Icons.manage_search_rounded),
           Icon(Icons.bookmark_add_outlined),
           Icon(Icons.person_3),
         ],

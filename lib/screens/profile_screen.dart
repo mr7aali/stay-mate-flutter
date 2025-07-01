@@ -41,12 +41,6 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      // appBar: AppBar(
-      //   backgroundColor: Colors.black,
-      //   title: const Text('Profile', style: TextStyle(color: Colors.white)),
-      //   centerTitle: true,
-      //   iconTheme: const IconThemeData(color: Colors.white),
-      // ),
       body: Column(
         children: [
           const SizedBox(height: 30),
@@ -61,6 +55,15 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(user.email, style: const TextStyle(color: Colors.grey)),
+          const SizedBox(height: 8),
+          Text(
+            user.role.toUpperCase(),
+            style: TextStyle(
+              color: Colors.blue[700],
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
           const SizedBox(height: 30),
           Expanded(
             child: ListView(

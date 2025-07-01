@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/bookmark_screen.dart';
 import 'package:flutter_app/screens/change_password_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
-import 'package:flutter_app/screens/signin_screen.dart';
+// import 'package:flutter_app/screens/signin_screen.dart';
 import 'package:flutter_app/widgets/custom_navigation_bar.dart';
 import 'package:flutter_app/widgets/home_content_page.dart';
+
 import 'package:provider/provider.dart';
 import '../auth/auth_provider.dart';
-// import 'welcome_screen.dart';
+import 'welcome_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,28 +21,28 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     const HomeContentPage(),
-    const ChangePasswordScreen(),
+    // const ChangePasswordScreen(),
     const BookmarksScreen(),
     const ProfileScreen(),
   ];
   final List<String> _titles = [
     'Find Accommodation',
-    'Search',
+    // 'Search',
     'Bookmarks',
     'Profile',
   ];
 
-  void _checkAuthAndRedirect() async {
-    final auth = Provider.of<AuthProvider>(context, listen: false);
-    if (auth.token == null || auth.token!.isEmpty || auth.isTokenExpired()) {
-      await auth.logout();
-      if (!mounted) return;
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const SignInScreen()),
-        (route) => false,
-      );
-    }
-  }
+  // void _checkAuthAndRedirect() async {
+  //   final auth = Provider.of<AuthProvider>(context, listen: false);
+  //   if (auth.token == null || auth.token!.isEmpty || auth.isTokenExpired()) {
+  //     await auth.logout();
+  //     if (!mounted) return;
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //       MaterialPageRoute(builder: (context) => const SignInScreen()),
+  //       (route) => false,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.logout, color: Colors.redAccent),
             tooltip: 'Logout',
             onPressed: () async {
-              await auth.logout();
+              // await auth.logout();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+              );
             },
           ),
         ],
