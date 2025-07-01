@@ -21,6 +21,23 @@ class BookmarkHotelCard extends StatelessWidget {
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Image.asset(
+                    'assets/images/hotel_not_found.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    'assets/images/hotel_not_found.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
             ),
             const SizedBox(width: 14),
