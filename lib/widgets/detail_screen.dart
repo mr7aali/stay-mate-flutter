@@ -137,8 +137,22 @@ class DetailScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Added to bookmarks!')),
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Bookmark Added'),
+                                content: const Text(
+                                  'This hotel has been added to your bookmarks.',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed:
+                                        () => Navigator.of(context).pop(),
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              ),
                         );
                       },
                       icon: const Icon(Icons.bookmark_add_outlined),
@@ -154,8 +168,22 @@ class DetailScreen extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Booking confirmed!')),
+                        showDialog(
+                          context: context,
+                          builder:
+                              (context) => AlertDialog(
+                                title: const Text('Booking Confirmed'),
+                                content: const Text(
+                                  'Your booking has been confirmed!',
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed:
+                                        () => Navigator.of(context).pop(),
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              ),
                         );
                       },
                       icon: const Icon(Icons.check_circle_outline),
@@ -168,11 +196,6 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 18),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Back'),
               ),
             ],
           ),
