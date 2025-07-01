@@ -3,7 +3,6 @@ import 'package:flutter_app/screens/bookmark_screen.dart';
 import 'package:flutter_app/screens/change_password_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
 import 'package:flutter_app/screens/signin_screen.dart';
-import 'package:flutter_app/widgets/custom_drawer.dart';
 import 'package:flutter_app/widgets/custom_navigation_bar.dart';
 import 'package:flutter_app/widgets/home_content_page.dart';
 import 'package:provider/provider.dart';
@@ -32,40 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'Profile',
   ];
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-
-  //   final auth = Provider.of<AuthProvider>(context, listen: false);
-
-  //   if (auth.token == null || auth.token!.isEmpty || auth.isTokenExpired()) {
-  //     Future.microtask(() async {
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-  //         (route) => false,
-  //       );
-  //     });
-  //   }
-  //   print("Home page");
-  // }
-  // @overri?de
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-
-  //   final auth = Provider.of<AuthProvider>(context, listen: false);
-
-  //   if (auth.token == null || auth.token!.isEmpty || auth.isTokenExpired()) {
-  //     Future.microtask(() async {
-  //       await auth.logout(); // Clear storage and token
-  //       if (!mounted) return;
-  //       Navigator.of(context).pushAndRemoveUntil(
-  //         MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-  //         (route) => false,
-  //       );
-  //     });
-  //   }
-  // }
-
   void _checkAuthAndRedirect() async {
     final auth = Provider.of<AuthProvider>(context, listen: false);
     if (auth.token == null || auth.token!.isEmpty || auth.isTokenExpired()) {
@@ -77,10 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
   }
-
-  //  MaterialPageRoute(
-  //                             builder: (context) => SignInScreen(),
-  //                           ),
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         forceMaterialTransparency: false,
-        // leading: Builder(
-        //   builder:
-        //       (context) => IconButton(
-        //         icon: const Icon(Icons.menu, color: Colors.white),
-        //         onPressed: () {
-        //           Scaffold.of(context).openDrawer();
-        //         },
-        //       ),
-        // ),
+
         actions: [
           IconButton(
             icon: const Icon(Icons.logout, color: Colors.redAccent),
@@ -116,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      // drawer: CustomDrawer(),
+
       body: _screens[_selectedIndex], // ← Switch between pages
 
       bottomNavigationBar: CustomBottomNav_Bar(

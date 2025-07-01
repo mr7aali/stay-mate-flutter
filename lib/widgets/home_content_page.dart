@@ -68,6 +68,57 @@ class _HomeContentPageState extends State<HomeContentPage> {
       amenities: ['WiFi', 'Breakfast', 'Pool', 'Parking', 'Spa', 'AC', 'TV'],
       stars: 5,
     ),
+
+    ...List.generate(
+      45,
+      (i) => Hotel(
+        name: 'Hotel ${i + 6}',
+        location:
+            [
+              'New York, New York',
+              'Miami, Florida',
+              'Chicago, Illinois',
+              'Austin, Texas',
+              'Seattle, Washington',
+              'Portland, Oregon',
+              'Las Vegas, Nevada',
+              'Orlando, Florida',
+              'San Diego, California',
+              'Boston, Massachusetts',
+              'Dallas, Texas',
+              'San Francisco, California',
+              'Houston, Texas',
+              'Phoenix, Arizona',
+              'Philadelphia, Pennsylvania',
+              'Atlanta, Georgia',
+              'Nashville, Tennessee',
+              'Salt Lake City, Utah',
+              'Minneapolis, Minnesota',
+              'Charlotte, North Carolina',
+            ][i % 20],
+        price: 60 + (i * 10) % 450,
+        imageUrl:
+            [
+              'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
+              'https://images.unsplash.com/photo-1464983953574-0892a716854b',
+              'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
+              'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd',
+              'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_1280.jpg',
+            ][i % 5],
+        amenities:
+            [
+              ['WiFi', 'Parking'],
+              ['WiFi', 'Breakfast', 'Pool'],
+              ['WiFi', 'Parking', 'AC', 'TV'],
+              ['WiFi', 'Breakfast', 'Pool', 'Parking', 'Spa', 'AC', 'TV'],
+              ['WiFi', 'Pool', 'Spa'],
+              ['WiFi', 'Breakfast', 'AC'],
+              ['WiFi', 'Parking', 'TV'],
+              ['WiFi', 'Breakfast', 'Pool', 'Parking', 'AC', 'TV'],
+            ][i % 8],
+        stars: 2 + (i % 4),
+      ),
+    ),
   ];
 
   String searchText = '';
