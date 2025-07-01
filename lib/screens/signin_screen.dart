@@ -9,6 +9,7 @@ import '../api/api_services.dart';
 import '../screens/home_screen.dart';
 // import 'pag';
 import 'package:flutter_app/auth/auth_provider.dart';
+import '../providers/user_provider.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -40,62 +41,24 @@ class _SignInScreenState extends State<SignInScreen> {
         builder: (context) => const Center(child: CircularProgressIndicator()),
       );
       try {
-        // final response = await _apiService.login(
-        //   email: emailController.text,
-        //   password: passwordController.text,
-        // );
-        final Map<String, dynamic> response = {
-          'data': {
-            '_id': '123abc',
-            'email': 'test@example.com',
-            'role': 'user',
-          },
-          'token': {'access_token': 'dummy_access_token_456'},
-        };
-        final id = response['data']['_id'] as String?;
-        final email = response['data']['email'] as String?;
-        final role = response['data']['role'] as String?;
-        final accessToken = response['token']['access_token'] as String?;
-        print(accessToken);
-        if (id != null &&
-            email != null &&
-            role != null &&
-            accessToken != null) {
-          await Provider.of<AuthProvider>(
-            // ignore: use_build_context_synchronously
+        // Simulate login and set user role based on email
+        Provider.of<UserProvider>(
+          context,
+          listen: false,
+        ).loginWithEmail(emailController.text);
+        if (mounted) {
+          Navigator.pop(context); // Close loading dialog
+          Navigator.push(
             context,
-            listen: false,
-          ).login(id: id, email: email, role: role, accessToken: accessToken);
-          if (mounted) {
-            Navigator.pop(context); // Close loading dialog
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          }
-        } else {
-          if (mounted) {
-            Navigator.pop(context); // Close loading dialog
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Invalid response data from server'),
-              ),
-            );
-          }
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
         }
       } catch (e) {
         if (mounted) {
           Navigator.pop(context); // Close loading dialog
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                e.toString().contains('401')
-                    ? 'Invalid email or password'
-                    : 'Login failed: $e',
-              ),
-            ),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Login failed: $e')));
         }
       } finally {
         if (mounted) {

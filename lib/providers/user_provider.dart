@@ -1,14 +1,37 @@
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
 
+// admin, manager, user
 class UserProvider with ChangeNotifier {
-  final User _user = User(
-    name: 'Sheikh Sukur Ali',
-    email: 'sheikh.sukur@example.com',
-    profileImageUrl: 'https://i.pravatar.cc/150?img=3',
-  );
+  late User _user;
 
   User get user => _user;
+
+  UserProvider() {
+    // Default to user role
+    _user = User(
+      name: 'Sheikh Sukur Ali',
+      email: 'sheikh.sukur@example.com',
+      profileImageUrl: 'https://i.pravatar.cc/150?img=3',
+      role: 'user',
+    );
+  }
+
+  void loginWithEmail(String email, {String? name, String? profileImageUrl}) {
+    String role = 'user';
+    if (email == 'admin@gmail.com') {
+      role = 'admin';
+    } else if (email == 'manager@gmail.com') {
+      role = 'manager';
+    }
+    _user = User(
+      name: name ?? 'Demo $role',
+      email: email,
+      profileImageUrl: profileImageUrl ?? 'https://i.pravatar.cc/150?u=$role',
+      role: role,
+    );
+    notifyListeners();
+  }
 
   void updateUser({String? name, String? email, String? profileImageUrl}) {
     if (name != null) _user.name = name;

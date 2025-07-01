@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: CustomBottomNav_Bar(
         selectedIndex: _selectedIndex,
         onTap: (index) {
-          _checkAuthAndRedirect();
+          // _checkAuthAndRedirect();
           setState(() {
             _selectedIndex = index;
           });
