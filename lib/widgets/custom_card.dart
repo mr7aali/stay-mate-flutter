@@ -20,11 +20,22 @@ class CustomCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.network(
-              hotel.imageUrl,
+            child: FadeInImage(
+              placeholder: const AssetImage(
+                'assets/images/hotel_not_found.png',
+              ),
+              image: NetworkImage(hotel.imageUrl),
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 150, // Adjustable height for the image
+              height: 150,
+              imageErrorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/images/hotel_not_found.png',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 150,
+                );
+              },
             ),
           ),
           Padding(
