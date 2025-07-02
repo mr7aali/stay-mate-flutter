@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/custom_card.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 class Hotel {
   final String name;
@@ -210,19 +211,34 @@ class _HomeContentPageState extends State<HomeContentPage> {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Location',
-                          prefixIcon: Icon(Icons.location_on_outlined),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      DropdownSearch<String>(
+                        items:
+                            allHotels.map((h) => h.location).toSet().toList(),
+                        selectedItem:
+                            tempLocation.isEmpty ? null : tempLocation,
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                            labelText: 'Location',
+                            prefixIcon: Icon(Icons.location_on_outlined),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
-                        controller: TextEditingController.fromValue(
-                          TextEditingValue(text: tempLocation),
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          searchFieldProps: TextFieldProps(
+                            decoration: InputDecoration(
+                              labelText: 'Search location',
+                            ),
+                          ),
                         ),
                         onChanged:
-                            (val) => setModalState(() => tempLocation = val),
+                            (val) =>
+                                setModalState(() => tempLocation = val ?? ''),
+                        clearButtonProps: const ClearButtonProps(
+                          isVisible: true,
+                        ),
                       ),
                       const SizedBox(height: 18),
                       const Text(
