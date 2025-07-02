@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 
-class DetailScreen extends StatelessWidget {
-  final String name = 'Mountain Lodge';
-  final String location = 'Aspen, Colorado';
-  final String feature = 'Ski-in/ski-out access';
-  final String price = '250/night';
-  final String description =
+class DetailScreen extends StatefulWidget {
+  const DetailScreen({super.key});
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  String name = 'Mountain Lodge';
+  String location = 'Aspen, Colorado';
+  String feature = 'Ski-in/ski-out access';
+  String price = '250/night';
+  String description =
       'A luxurious retreat nestled in the heart of the Rockies, offering stunning views, cozy rooms, and top-notch amenities. Perfect for skiing enthusiasts and nature lovers.';
-  final String imageUrl =
+  String imageUrl =
       'https://cdn.pixabay.com/photo/2015/04/23/22/00/new-year-background-736885_1280.jpg';
+
   final List<Map<String, dynamic>> amenities = [
     {'icon': Icons.wifi, 'label': 'Free WiFi'},
     {'icon': Icons.free_breakfast, 'label': 'Breakfast'},
@@ -21,7 +29,68 @@ class DetailScreen extends StatelessWidget {
     {'icon': Icons.tv, 'label': 'TV'},
   ];
 
-  DetailScreen({super.key});
+  void _showEditDialog() {
+    final nameController = TextEditingController(text: name);
+    final locationController = TextEditingController(text: location);
+    final featureController = TextEditingController(text: feature);
+    final priceController = TextEditingController(text: price);
+    final descriptionController = TextEditingController(text: description);
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Edit Details'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: 'Name'),
+                  ),
+                  TextField(
+                    controller: locationController,
+                    decoration: const InputDecoration(labelText: 'Location'),
+                  ),
+                  TextField(
+                    controller: featureController,
+                    decoration: const InputDecoration(labelText: 'Feature'),
+                  ),
+                  TextField(
+                    controller: priceController,
+                    decoration: const InputDecoration(labelText: 'Price'),
+                  ),
+                  TextField(
+                    controller: descriptionController,
+                    decoration: const InputDecoration(labelText: 'Description'),
+                    maxLines: 3,
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    name = nameController.text;
+                    location = locationController.text;
+                    feature = featureController.text;
+                    price = priceController.text;
+                    description = descriptionController.text;
+                  });
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Save'),
+              ),
+            ],
+          ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,26 +209,7 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton.icon(
-                        onPressed: () {
-                          // Implement edit details logic here
-                          showDialog(
-                            context: context,
-                            builder:
-                                (context) => AlertDialog(
-                                  title: const Text('Edit Details'),
-                                  content: const Text(
-                                    'Edit details functionality for admin/manager.',
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed:
-                                          () => Navigator.of(context).pop(),
-                                      child: const Text('OK'),
-                                    ),
-                                  ],
-                                ),
-                          );
-                        },
+                        onPressed: _showEditDialog,
                         icon: const Icon(Icons.edit),
                         label: const Text('Edit Details'),
                         style: ElevatedButton.styleFrom(
@@ -240,7 +290,7 @@ class DetailScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
+      ),
+    );
+  }
 }
