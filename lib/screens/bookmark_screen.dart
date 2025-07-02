@@ -127,7 +127,14 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                         child: SizedBox(
                           height: 90,
                           width: double.infinity,
-                          child: BookmarkHotelCard(hotel: hotel),
+                          child: BookmarkHotelCard(
+                            hotel: hotel,
+                            onDelete: () {
+                              setState(() {
+                                bookmarkedHotels.removeAt(index);
+                              });
+                            },
+                          ),
                         ),
                       ),
                     );

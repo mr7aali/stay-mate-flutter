@@ -3,7 +3,8 @@ import '../widgets/home_content_page.dart'; // For Hotel model
 
 class BookmarkHotelCard extends StatelessWidget {
   final Hotel hotel;
-  const BookmarkHotelCard({super.key, required this.hotel});
+  final VoidCallback? onDelete;
+  const BookmarkHotelCard({super.key, required this.hotel, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +105,12 @@ class BookmarkHotelCard extends StatelessWidget {
                 const Icon(Icons.bookmark, color: Colors.blue, size: 20),
               ],
             ),
+            if (onDelete != null)
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: onDelete,
+                tooltip: 'Delete bookmark',
+              ),
           ],
         ),
       ),

@@ -91,11 +91,11 @@ class ProfileScreen extends StatelessWidget {
                   title: 'Notifications',
                   route: '/notifications',
                 ),
-                ProfileTile(
-                  icon: Icons.settings,
-                  title: 'Settings',
-                  route: '/settings',
-                ),
+                // ProfileTile(
+                //   icon: Icons.settings,
+                //   title: 'Settings',
+                //   route: '/settings',
+                // ),
                 ProfileTile(
                   icon: Icons.logout,
                   title: 'Logout',
