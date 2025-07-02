@@ -199,7 +199,7 @@ class _HomeContentPageState extends State<HomeContentPage> {
                             onPressed: () {
                               setState(() {
                                 filterLocation = '';
-                                priceRange = const RangeValues(0, 500);
+                                priceRange = const RangeValues(50, 500);
                                 selectedAmenities.clear();
                                 selectedStars = null;
                               });
