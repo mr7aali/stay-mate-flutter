@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 import '../widgets/profile_tile.dart';
 import '../screens/welcome_screen.dart';
+import 'package:flutter_app/screens/add_hotel_screen.dart.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -96,6 +97,19 @@ class ProfileScreen extends StatelessWidget {
                 //   title: 'Settings',
                 //   route: '/settings',
                 // ),
+                if (user.role == 'admin' || user.role == 'manager')
+                  ProfileTile(
+                    icon: Icons.add_business,
+                    title: 'Add Hotel',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddHotelScreen(),
+                        ),
+                      );
+                    },
+                  ),
                 ProfileTile(
                   icon: Icons.logout,
                   title: 'Logout',

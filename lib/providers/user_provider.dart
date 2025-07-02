@@ -25,7 +25,7 @@ class UserProvider with ChangeNotifier {
       role = 'manager';
     }
     _user = User(
-      name: name ?? 'Demo $role',
+      name: name ?? 'Sheikh Ali - $role',
       email: email,
       profileImageUrl: profileImageUrl ?? 'https://i.pravatar.cc/150?u=$role',
       role: role,
