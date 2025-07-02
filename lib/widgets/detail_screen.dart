@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/user_provider.dart';
 
 class DetailScreen extends StatelessWidget {
   final String name = 'Mountain Lodge';
@@ -23,6 +25,7 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRole = Provider.of<UserProvider>(context).user.role;
     return Scaffold(
       appBar: AppBar(title: Text(name)),
       body: SingleChildScrollView(
@@ -136,29 +139,36 @@ class DetailScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder:
-                              (context) => AlertDialog(
-                                title: const Text('Bookmark Added'),
-                                content: const Text(
-                                  'This hotel has been added to your bookmarks.',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed:
-                                        () => Navigator.of(context).pop(),
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                        );
-                      },
+                      onPressed:
+                          (userRole == 'admin' || userRole == 'manager')
+                              ? null
+                              : () {
+                                showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertDialog(
+                                        title: const Text('Bookmark Added'),
+                                        content: const Text(
+                                          'This hotel has been added to your bookmarks.',
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () =>
+                                                    Navigator.of(context).pop(),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                              },
                       icon: const Icon(Icons.bookmark_add_outlined),
                       label: const Text('Add Bookmark'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueGrey,
+                        backgroundColor:
+                            (userRole == 'admin' || userRole == 'manager')
+                                ? Colors.grey
+                                : Colors.blueGrey,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
@@ -167,29 +177,36 @@ class DetailScreen extends StatelessWidget {
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder:
-                              (context) => AlertDialog(
-                                title: const Text('Booking Confirmed'),
-                                content: const Text(
-                                  'Your booking has been confirmed!',
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed:
-                                        () => Navigator.of(context).pop(),
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                        );
-                      },
+                      onPressed:
+                          (userRole == 'admin' || userRole == 'manager')
+                              ? null
+                              : () {
+                                showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertDialog(
+                                        title: const Text('Booking Confirmed'),
+                                        content: const Text(
+                                          'Your booking has been confirmed!',
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed:
+                                                () =>
+                                                    Navigator.of(context).pop(),
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                              },
                       icon: const Icon(Icons.check_circle_outline),
                       label: const Text('Book Now'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
+                        backgroundColor:
+                            (userRole == 'admin' || userRole == 'manager')
+                                ? Colors.grey
+                                : Colors.orange,
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 14),
                       ),
